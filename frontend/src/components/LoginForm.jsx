@@ -1,29 +1,38 @@
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
+// frontend/src/components/LoginForm.jsx
+import React, { useState } from 'react'
 
-  const login = async (username, password) => {
-    // build form data
-    const form = new URLSearchParams()
-    form.append('username', username)
-    form.append('password', password)
+export default function LoginForm({ onLogin }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-    // post to Django’s login endpoint, with cookies
-    await axios.post('/api-auth/login/', form, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      withCredentials: true,
-    })
-
-    setUser({ username })
-  }
-
-  const logout = async () => {
-    await axios.post('/api-auth/logout/', null, { withCredentials: true })
-    setUser(null)
+  const handleSubmit = e => {
+    e.preventDefault()
+    onLogin(username, password)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <form onSubmit={handleSubmit}>
+      <div style={{ marginBottom: '8px' }}>
+        <label htmlFor="username">Username</label><br/>
+        <input
+          id="username"
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          required
+        />
+      </div>
+      <div style={{ marginBottom: '12px' }}>
+        <label htmlFor="password">Password</label><br/>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit">Login</button>
+    </form>
   )
 }

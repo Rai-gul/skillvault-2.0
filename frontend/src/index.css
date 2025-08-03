@@ -1,68 +1,381 @@
+/* 🚀 ULTIMATE CSS - Modern Note App with Advanced Styling */
+
+/* Custom properties for theming and consistency */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Color palette - Modern dark/light theme */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-900: #1e3a8a;
+  
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-600: #4b5563;
+  --neutral-700: #374151;
+  --neutral-800: #1f2937;
+  --neutral-900: #111827;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+  
+  /* Typography */
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Modern CSS reset with performance optimizations */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+html {
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* Body with animated gradient background */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: var(--font-body);
+  background: var(--gradient-bg);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: var(--neutral-800);
   min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Glassmorphism container with advanced styling */
+.app-container {
+  max-width: 650px;
+  margin: var(--space-2xl) auto;
+  padding: var(--space-2xl);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.app-container:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(102, 126, 234, 0.4);
+}
+
+/* Modern typography with enhanced heading */
+.app-container h1 {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: var(--space-xl);
+  background: linear-gradient(135deg, var(--neutral-800), var(--primary-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  letter-spacing: -0.025em;
+}
+
+.app-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.1); }
+}
+
+/* Enhanced form styling with modern inputs */
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.note-form textarea {
+  padding: var(--space-lg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  resize: vertical;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  min-height: 120px;
+  color: var(--neutral-800);
+  transition: all var(--transition-normal);
+  outline: none;
+  line-height: 1.6;
+}
+
+.note-form textarea::placeholder {
+  color: rgba(31, 41, 55, 0.6);
+}
+
+.note-form textarea:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Ultra-modern button with multiple effects */
+.note-form button {
+  position: relative;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-md);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.note-form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.note-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(102, 126, 234, 0.4);
+}
+
+.note-form button:hover::before {
+  left: 100%;
+}
+
+.note-form button:active {
+  transform: translateY(0);
+  transition: transform var(--transition-fast);
+}
+
+/* Modern notes list with card-based design */
+.note-list {
+  margin-top: var(--space-2xl);
+  list-style: none;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.note-item {
+  padding: var(--space-xl);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.note-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+}
+
+.note-item:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.note-item:hover::before {
+  transform: scaleX(1);
+}
+
+.note-item em {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  margin-bottom: var(--space-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.note-item p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--neutral-700);
+  font-weight: 400;
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  .app-container {
+    margin: var(--space-lg);
+    padding: var(--space-xl);
+    border-radius: var(--radius-xl);
   }
-  a:hover {
-    color: #747bff;
+  
+  .app-container h1 {
+    font-size: 1.75rem;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .note-form textarea {
+    padding: var(--space-md);
+    min-height: 100px;
+  }
+  
+  .note-item {
+    padding: var(--space-lg);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body {
+    animation: none;
+  }
+}
+
+/* Focus indicators for better accessibility */
+.note-form button:focus-visible,
+.note-form textarea:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+/* Loading states and micro-interactions */
+.note-item {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.note-item:nth-child(1) { animation-delay: 0.1s; }
+.note-item:nth-child(2) { animation-delay: 0.2s; }
+.note-item:nth-child(3) { animation-delay: 0.3s; }
+.note-item:nth-child(4) { animation-delay: 0.4s; }
+.note-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .app-container {
+    background: white;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .note-form {
+    display: none;
   }
 }

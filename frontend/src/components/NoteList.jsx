@@ -11,10 +11,10 @@ export default function NoteList() {
 
   return (
     <div>
-      <NoteForm onAdded={note => setNotes(n => [note, ...n])} />
-      <ul>
+      <NoteForm onAdded={n => setNotes(prev => [n, ...prev])} />
+      <ul className="note-list">
         {notes.map(n => (
-          <li key={n.id}>
+          <li className="note-item" key={n.id}>
             <em>{new Date(n.created_at).toLocaleString()}</em>
             <p>{n.decrypted}</p>
           </li>

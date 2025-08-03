@@ -1,25 +1,33 @@
 import React, { createContext, useState } from 'react'
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
-
+axios.defaults.baseURL = '/'  // proxy to Django
 export const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('token') || null)
 
-  const login = async (username, password) => {
-    await axios.post('/api-auth/login/', { username, password })
-    setUser({ username })
+  // If we have a token, attach it to all requests
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Token ${token}`
   }
 
-  const logout = async () => {
-    await axios.post('/api-auth/logout/')
-    setUser(null)
+  const login = async (username, password) => {
+    const resp = await axios.post('/api-token-auth/', { username, password })
+    const t = resp.data.token
+    localStorage.setItem('token', t)
+    setToken(t)
+    axios.defaults.headers.common['Authorization'] = `Token ${t}`
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    setToken(null)
+    delete axios.defaults.headers.common['Authorization']
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ token, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -12,7 +12,7 @@ export default function NoteForm({ onAdded }) {
   }
 
   return (
-    <form onSubmit={submit}>
+    <form className="note-form" onSubmit={submit}>
       <textarea
         value={text}
         onChange={e => setText(e.target.value)}
